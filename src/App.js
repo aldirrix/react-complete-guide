@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Person from "./Person/Person";
 
-const app = () => {
+const App = () => {
   const persons = [
     { id: "idNumber1", name: "Aldo", age: 28 },
     { id: "idNumber2", name: "Bono", age: 26 },
@@ -24,10 +24,31 @@ const app = () => {
     setPersonsState(personsState.filter((person) => person.id !== id));
   };
 
+  const paragraphClasses = [];
+
+  if (personsState.length < 3) {
+    paragraphClasses.push("red");
+  }
+  if (personsState.length < 2) {
+    paragraphClasses.push("bold");
+  }
+
+  const buttonStyle = {
+    backgroundColor: "green",
+    color: "white",
+    font: "inherit",
+    border: "1px solid blue",
+    padding: "8px",
+    cursor: "pointer",
+  };
+
   return (
     <div className="App">
       <h1>Hello</h1>
-      <button onClick={switchNameHandler}>Click me</button>
+      <p className={paragraphClasses.join(" ")}>I am working!</p>
+      <button onClick={switchNameHandler} style={buttonStyle}>
+        Click me
+      </button>
       {personsState.map((person) => (
         <Person
           key={person.id}
@@ -40,4 +61,4 @@ const app = () => {
   );
 };
 
-export default app;
+export default App;
