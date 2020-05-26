@@ -5,7 +5,7 @@ import classes from "./Person.module.css";
 const person = (props) => {
   return (
     <div className={classes.Person}>
-      <p onClick={props.click}>
+      <p onClick={props.clicked}>
         Im a {props.name} and im {props.age} years Old
       </p>
       <p>{props.children}</p>
