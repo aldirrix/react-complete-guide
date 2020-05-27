@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Persons from "../components/Persons";
 import Cockpit from "../components/Cockpit";
+import AuthContext from "../context/auth";
 
 const App = () => {
   const defaultPersons = [
@@ -12,6 +13,7 @@ const App = () => {
   ];
 
   const [persons, setPersons] = useState(defaultPersons);
+  const [authenticated, setAuthenticated] = useState(false);
 
   const switchNameHandler = () => {
     setPersons([
@@ -25,10 +27,18 @@ const App = () => {
     setPersons(persons.filter((person) => person.id !== id));
   };
 
+  const authenticationHandler = () => {
+    setAuthenticated(!authenticated);
+  };
+
   return (
     <div className="App">
-      <Cockpit clicked={switchNameHandler} personsLength={persons.length} />
-      <Persons clicked={deletePersonHandler} persons={persons} />
+      <AuthContext.Provider
+        value={{ authenticated: authenticated, login: authenticationHandler }}
+      >
+        <Cockpit clicked={switchNameHandler} personsLength={persons.length} />
+        <Persons clicked={deletePersonHandler} persons={persons} />
+      </AuthContext.Provider>
     </div>
   );
 };

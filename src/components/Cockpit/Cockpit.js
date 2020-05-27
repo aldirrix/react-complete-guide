@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import classes from "./Cockpit.module.css";
+import AuthContext from "../../context/auth";
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+  const authContext = useContext(AuthContext);
   const paragraphClasses = [];
 
   if (props.personsLength < 3) {
@@ -19,8 +21,9 @@ const cockpit = (props) => {
       <button onClick={props.clicked} className={classes.Button}>
         Click me
       </button>
+      <button onClick={authContext.login}>Login</button>
     </div>
   );
 };
 
-export default cockpit;
+export default Cockpit;

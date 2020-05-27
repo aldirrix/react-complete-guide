@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import classes from "./Person.module.css";
+import AuthContext from "../../context/auth";
 
-const person = (props) => {
+const Person = (props) => {
+  const authContext = useContext(AuthContext);
+
   return (
     <div className={classes.Person}>
       <p onClick={props.clicked}>
-        Im a {props.name} and im {props.age} years Old
+        {authContext.authenticated
+          ? `Im a ${props.name} and im ${props.age} years Old`
+          : "Please login"}
       </p>
       <p>{props.children}</p>
     </div>
   );
 };
 
-export default person;
+export default Person;
